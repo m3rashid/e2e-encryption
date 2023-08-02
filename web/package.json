@@ -8,7 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {},
+  "dependencies": {
+    "cryptico": "^1.0.2"
+  },
   "devDependencies": {
     "@types/crypto-js": "^4.1.1",
     "typescript": "^5.0.2",
