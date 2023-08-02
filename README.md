@@ -1,1 +1,1 @@
-### End to End Encryption
+### Simple End-to-End Encryption Implementation

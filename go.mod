@@ -1,3 +1,3 @@
-module e2e-encryption
+module simple-e2ee
 
 go 1.20
