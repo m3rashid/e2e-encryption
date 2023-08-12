@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"simple-e2ee/handlers"
 )
 
 func main() {
-	fmt.Println("Hello World")
-
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
 			fmt.Println(err)
 		}
 		fmt.Println(string(body))
-		fmt.Fprintf(w, "Hello World")
 		w.Write([]byte("Hello World"))
 	})
+
+	http.HandleFunc("/exchange-keys", handlers.ExchangeKeys)
 
 	http.ListenAndServe(":8080", nil)
 }
