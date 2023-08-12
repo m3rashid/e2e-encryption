@@ -1,3 +1,10 @@
+export const stringifyKey: (key: CryptoKey) => Promise<string> = async (
+  key
+) => {
+  const exported = await crypto.subtle.exportKey('jwk', key);
+  return btoa(JSON.stringify(exported));
+};
+
 export const genKey: () => Promise<{
   publicKey: string;
   privateKey: string;
@@ -13,11 +20,8 @@ export const genKey: () => Promise<{
     ['encrypt', 'decrypt']
   );
 
-  const publicKey = await crypto.subtle.exportKey('jwk', keyPair.publicKey);
-  const privateKey = await crypto.subtle.exportKey('jwk', keyPair.privateKey);
+  const publicKey = await stringifyKey(keyPair.publicKey);
+  const privateKey = await stringifyKey(keyPair.privateKey);
 
-  return {
-    publicKey: btoa(JSON.stringify(publicKey)),
-    privateKey: btoa(JSON.stringify(privateKey)),
-  };
+  return { publicKey, privateKey };
 };
