@@ -19,7 +19,7 @@ const genKey = async () => {
     true,
     ['encrypt', 'decrypt']
   );
-  console.log(keys);
+  console.log(keys.privateKey.exportKey('jwk'));
 };
 
 function App() {
