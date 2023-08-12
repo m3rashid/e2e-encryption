@@ -1,9 +1,9 @@
 import { Buffer } from 'buffer';
 
-export const convertKeyToBase64 = async (key: CryptoKey) => {
+export const convertPrivateKeyToBase64 = async (key: CryptoKey) => {
   const exported = await crypto.subtle.exportKey('pkcs8', key);
   const buff = Buffer.from(exported).toString('base64');
-  return buff.toString();
+  return buff;
 };
 
 export const genKey = async () => {
@@ -11,14 +11,14 @@ export const genKey = async () => {
     {
       name: 'RSA-OAEP',
       modulusLength: 2048,
-      publicExponent: new Uint8Array([1, 0, 1]),
-      hash: 'SHA-256',
+      publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+      hash: { name: 'SHA-256' },
     },
     true,
     ['encrypt', 'decrypt']
   );
 
-  const privateKey = await convertKeyToBase64(keys.privateKey);
-  const publicKey = await convertKeyToBase64(keys.publicKey);
+  const privateKey = await convertPrivateKeyToBase64(keys.privateKey);
+  const publicKey = keys.publicKey;
   return { privateKey, publicKey };
 };
