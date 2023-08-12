@@ -1,11 +1,3 @@
-// import { Buffer } from 'buffer';
-
-// export const convertPrivateKeyToBase64: (
-//   key: CryptoKey
-// ) => Promise<string> = async (key) => {
-
-// };
-
 export const genKey: () => Promise<{
   publicKey: string;
   privateKey: string;
