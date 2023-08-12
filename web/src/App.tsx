@@ -19,10 +19,14 @@ const genKey = async () => {
     true,
     ['encrypt', 'decrypt']
   );
-  console.log(keys.privateKey.exportKey('jwk'));
+  // console.log(keys.privateKey.exportKey('jwk'));
+  const key = await crypto.subtle.exportKey('raw', keys.privateKey);
+  const decoder = new TextDecoder();
+  const keyString = decoder.decode(key);
+  console.log(keyString);
 };
 
-function App() {
+const App = () => {
   useEffect(() => {
     genKey();
     // create a public private key pair
@@ -33,6 +37,6 @@ function App() {
   }, []);
 
   return <div>hello</div>;
-}
+};
 
 export default App;
