@@ -29,6 +29,6 @@ func generateKeys() ([]byte, []byte) {
 
 func ExchangeKeys(w http.ResponseWriter, r *http.Request) {
 	privateKey, publicKey := generateKeys()
-	w.Write(privateKey)
-	w.Write(publicKey)
+	w.Write([]byte(privateKey))
+	w.Write([]byte(publicKey))
 }
