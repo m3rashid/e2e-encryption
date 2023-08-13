@@ -9,6 +9,18 @@ import (
 	"os"
 )
 
+type Session struct {
+	PrivateKey string
+	PublicKey  string `json:"publicKey"`
+	UserId     string `json:"userId"`
+}
+
+func ExchangeKeys(w http.ResponseWriter, r *http.Request) {
+	privateKey, publicKey := generateKeys()
+	w.Write([]byte(privateKey))
+	w.Write([]byte(publicKey))
+}
+
 func generateKeys() (string, string) {
 	privateKey, err := rsa.GenerateKey(rand.Reader, 4096)
 	if err != nil {
@@ -25,10 +37,4 @@ func generateKeys() (string, string) {
 		os.Exit(1)
 	}
 	return string(privateKeyBytes), string(publicKeyBytes)
-}
-
-func ExchangeKeys(w http.ResponseWriter, r *http.Request) {
-	privateKey, publicKey := generateKeys()
-	w.Write([]byte(privateKey))
-	w.Write([]byte(publicKey))
 }
