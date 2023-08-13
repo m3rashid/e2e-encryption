@@ -15,7 +15,7 @@ const App = () => {
     // use keys in further communication
   }, []);
 
-  return <div>hello</div>;
+  return <div className='bg-red-500'>hello</div>;
 };
 
 export default App;
