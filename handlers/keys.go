@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func generateKeys() ([]byte, []byte) {
+func generateKeys() (string, string) {
 	privateKey, err := rsa.GenerateKey(rand.Reader, 4096)
 	if err != nil {
 		fmt.Printf("Cannot generate RSA key\n")
@@ -24,7 +24,7 @@ func generateKeys() ([]byte, []byte) {
 		fmt.Printf("Cannot convert public key to byte array\n")
 		os.Exit(1)
 	}
-	return privateKeyBytes, publicKeyBytes
+	return string(privateKeyBytes), string(publicKeyBytes)
 }
 
 func ExchangeKeys(w http.ResponseWriter, r *http.Request) {
