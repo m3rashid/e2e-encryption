@@ -1,15 +1,25 @@
 import { Request, Response } from 'express';
 import { generateRsaKeyPair } from '../crypto/keys';
 
+export type Session = { clientPublicKey: string; serverPrivateKey: string };
+
+export const session = new Map<string, Session>();
+
 export const handleExchangeKeys = async (req: Request, res: Response) => {
   try {
-    const { publicKey } = req.body;
-    if (!publicKey) {
-      return res.status(400).json({ error: 'Missing public key' });
+    const { publicKey, clientId } = req.body;
+    if (!publicKey || !clientId) {
+      return res.status(400).json({ error: 'Missing public key or client ID' });
     }
+
     const { privateKey, publicKey: serverPublickey } =
       await generateRsaKeyPair();
-    console.log({ privateKey, serverPublickey });
+
+    session.set(clientId, {
+      clientPublicKey: publicKey,
+      serverPrivateKey: privateKey,
+    });
+
     return res.json({ publicKey: serverPublickey });
   } catch (err: any) {
     console.log(err);
