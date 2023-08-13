@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", handlers.Index)
+	http.HandleFunc("/", handlers.IndexRoute)
 	http.HandleFunc("/exchange-keys", handlers.ExchangeKeys)
 
 	fmt.Println("Server is running on port 8080")
