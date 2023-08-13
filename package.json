@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "ci": "pnpm i --production",
+    "build": "pnpm rollup -c",
+    "dev": "pnpm rollup -c -w",
+    "start": "node ./dist/index.js"
+  },
   "keywords": [],
   "author": "m3rashid",
   "license": "MIT",
@@ -13,8 +18,16 @@
     "express": "^4.18.2"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.4",
+    "@rollup/plugin-run": "^3.0.1",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/express": "^4.17.17",
+    "@types/node": "^20.4.10",
+    "rollup": "^3.28.0",
+    "rollup-plugin-includepaths": "^0.2.4",
+    "tslib": "^2.6.1",
     "typescript": "^5.1.6"
   }
 }
