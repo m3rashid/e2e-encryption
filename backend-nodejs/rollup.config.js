@@ -10,7 +10,7 @@ const dev = process.env.ROLLUP_WATCH === 'true';
 const pkg = JSON.parse(readFileSync('./package.json'));
 
 const config = {
-	input: './src/index.ts',
+	input: './index.ts',
 	output: {
 		file: 'dist/index.js',
 	},
